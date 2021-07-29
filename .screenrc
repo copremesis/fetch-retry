@@ -1,0 +1,13 @@
+startup_message off
+
+screen -t "Example in Action"               0 bash
+stuff "cd /src/fetch-retry; watch node index.js^M"
+screen -t "Intermittent 400 or 200 service" 1 bash
+stuff "cd /src/api; ruby intermittent.rb^M"
+screen -t "r00t"                            2 bash
+
+select 0
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r} (%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m%{W}%c %{g}]'
+
