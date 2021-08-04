@@ -7,8 +7,8 @@ const fetchRetry = async (url, options, n) => {
     return response;
   } else {
     if (n === 1) throw "Retry Limit reached";
-    console.log('retrying...', response.status);
-    return await fetchRetry(url, options, n - 1);
+    console.log(`Got ${response.status}. Doh! retrying...`);
+    return  fetchRetry(url, options, n - 1);
   }
 };
 

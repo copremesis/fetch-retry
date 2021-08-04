@@ -1,6 +1,6 @@
 FROM ubuntu
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y update
-RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y screen ruby ruby-dev nodejs npm jq #build-essential vim curl wget
+RUN DEBIAN_FRONTEND="noninteractive" apt-get install -y screen ruby ruby-dev nodejs npm jq #vim build-essential curl wget
 COPY .screenrc /root
 RUN gem install bundler
 RUN mkdir /src
