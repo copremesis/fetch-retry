@@ -22,19 +22,26 @@ const fetchRetry = async (url, options, n) => {
       return await response.json();
     } else {
       if (n === 1) throw "Retry Limit reached";
-      console.log(`Got ${response.status}. Doh! retrying...`);
+      console.log(`Got "${response.status}".   \e[0;36m  Doh! retrying...`);
       return  fetchRetry(url, options, n - 1);
     }
   }
 
   const axiosLogic = async () => {
+    const supportedMethod = (method) => {
+      return 'POST:GET'.split(':').includes(method);
+    }
+
+    if(!supportedMethod(options.method)) {
+      return `Method not supported ${options.method}`;
+    }
+
     try {
-      console.log(`attempting to reach ${url}`);
-      let response = await axios.post(url,  options.body);
+      let response = await axios[options.method.toLowerCase()](url,  options.body);
       return (({ status, statusText }) => ({ status, statusText }))(response);
     } catch(e) {
       if (n === 1) throw "Retry Limit reached";
-      console.log(e.message);
+      console.log(`Got "${e.message}". Doh! retrying...`);
       return  fetchRetry(url, options, n - 1);
     }
   }
