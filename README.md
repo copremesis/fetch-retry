@@ -4,7 +4,7 @@
 
 Persistent HTTP client for 3rd party services with intermittent response codes
 
-# Quick Start
+# docker
 
 ```
   docker run -it copremesis/fetch-retry:v1.0.0
