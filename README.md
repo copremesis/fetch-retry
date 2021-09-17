@@ -14,18 +14,22 @@ example use case
 
 ```javascript
 
-const { fetchRetry } = require("./lib/fetch-retry")
+const { hasModule, fetchRetry } = require("./lib/fetch-retry")
 main = async () => {
   const url = "http://localhost:4567/idp";
   const limit = 5;
-  console.log("Hold my beer...");
+  const options = {
+    method: "POST",
+    body: "this is a test",
+    axios: hasModule('axios')
+  }
+  console.log("requesting auth token @", url);
   let response;;
   try {
-    response = await fetchRetry(url, {method: "POST", body: "this is a test"}, limit);
-    const json = await response.json();
-    console.log(json, response.status);
+    response = await fetchRetry(url, options, limit);
+    console.log(response);
   } catch(e) {
-    console.error(e);
+    console.log(e);
   }
 }
 
